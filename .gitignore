@@ -11,7 +11,7 @@ pids
 .DS_*
 lib-cov
 deploy.enc
-coverage
+coverage/
 .nyc_output
 .grunt
 bower_components
@@ -30,3 +30,7 @@ typings/
 public
 yarn-error.log
 .vscode/
+.DS_*
+.sonarlint/
+node_modules/
+.env
