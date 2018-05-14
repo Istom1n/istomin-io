@@ -4,7 +4,7 @@ const path = require('path');
 const lost = require('lost');
 const pxtorem = require('postcss-pxtorem');
 const slash = require('slash');
-const createPaginatedPages = require('gatsby-paginate');
+// const createPaginatedPages = require('gatsby-paginate');
 // createPaginatedPages();
 
 exports.createPages = ({

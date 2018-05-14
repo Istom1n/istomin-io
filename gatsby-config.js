@@ -82,15 +82,15 @@ module.exports = {
             }]
         }
     }],
-    plugins: [{
-        resolve: `gatsby-plugin-yandex-metrika`,
-        options: {
-            trackingId: 48754313,
-            webvisor: true,
-            trackHash: true,
-            version: 2,
-        },
-    }],
+    // plugins: [{
+    //     resolve: `gatsby-plugin-yandex-metrika`,
+    //     options: {
+    //         trackingId: 48754313,
+    //         webvisor: true,
+    //         trackHash: true,
+    //         version: 2,
+    //     },
+    // }],
     plugins: [{
             resolve: `gatsby-source-filesystem`,
             options: {
