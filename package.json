@@ -7,9 +7,9 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "clean:cache": "rm -rf public && rm -rf .cache",
+    "clean:cache": "rm -rf public && rm -rf .cache && rm -rf node_modules",
     "lint": "./node_modules/.bin/eslint --cache --ext .js,.jsx --ignore-pattern public .",
-    "test": "./node_modules/.bin/jest && codecov",
+    "test": "./node_modules/.bin/jest && bash <(curl -s https://codecov.io/bash)",
     "deploy": "gatsby build --prefix-paths"
   },
   "keywords": [
@@ -29,7 +29,7 @@
     "gatsby-link": "^1.6.40",
     "gatsby-paginate": "^1.0.14",
     "gatsby-plugin-catch-links": "^1.0.22",
-    "gatsby-plugin-feed-generator": "^1.0.6",
+    "gatsby-plugin-feed": "^1.3.22",
     "gatsby-plugin-google-fonts": "0.0.4",
     "gatsby-plugin-offline": "^1.0.15",
     "gatsby-plugin-postcss-sass": "^1.0.20",
