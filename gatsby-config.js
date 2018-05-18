@@ -6,18 +6,17 @@ module.exports = {
         description: `Everything that seems interesting to me`,
         subtitle: `Simplex sigillum veri.`,
         copyright: `© Ivan Istomin. 2018`,
-        menu: [{
+        menu: [
+            {
                 label: `Статьи`,
-                path: `/`,
-            },
-            {
+                path: `/`
+            }, {
                 label: `Обо мне`,
-                path: `/about/`,
-            },
-            {
+                path: `/about/`
+            }, {
                 label: `Связаться со мной`,
-                path: `/contact/`,
-            },
+                path: `/contact/`
+            }
         ],
         author: {
             name: `Ivan Istomin`,
@@ -27,50 +26,50 @@ module.exports = {
             github: `Ivan-Istomin`,
             rss: `/feed.xml`,
             json: `/feed.json`,
-            vk: `istom1nher0`,
-        },
+            vk: `istom1nher0`
+        }
     },
-    plugins: [{
-        resolve: `gatsby-source-filesystem`,
-        options: {
-            path: `${__dirname}/src/pages`,
-            name: `pages`,
-        },
-    },
-    {
-        resolve: `gatsby-transformer-remark`,
-        options: {
-            plugins: [{
-                    resolve: `gatsby-remark-images`,
-                    options: {
-                        maxWidth: 960,
+    plugins: [
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                path: `${__dirname}/src/pages`,
+                name: `pages`
+            }
+        }, {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [
+                    {
+                        resolve: `gatsby-remark-images`,
+                        options: {
+                            maxWidth: 960
+                        }
+                    }, {
+                        resolve: `gatsby-remark-responsive-iframe`,
+                        options: {
+                            wrapperStyle: `margin-bottom: 1.0725rem`
+                        }
                     },
-                },
-                {
-                    resolve: `gatsby-remark-responsive-iframe`,
-                    options: {
-                        wrapperStyle: `margin-bottom: 1.0725rem`,
-                    }
-                },
-                `gatsby-remark-katex`,
-                `gatsby-remark-prismjs`,
-                `gatsby-remark-copy-linked-files`,
-                `gatsby-remark-smartypants`
-            ]
-        }
-    },
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
-    {
-        resolve: `gatsby-plugin-google-fonts`,
-        options: {
-            fonts: [`roboto:400,400i,500,700`],
-        }
-    },
-    {
-        resolve: `gatsby-plugin-sitemap`,
-        options: {
-            query: (`
+                    `gatsby-remark-katex`,
+                    `gatsby-remark-prismjs`,
+                    `gatsby-remark-copy-linked-files`,
+                    `gatsby-remark-smartypants`
+                ]
+            }
+        },
+        `gatsby-plugin-sharp`,
+        `gatsby-transformer-sharp`,
+        `gatsby-plugin-react-helmet`,
+        {
+            resolve: `gatsby-plugin-google-fonts`,
+            options: {
+                fonts: [`roboto:400,400i,500,700`]
+            }
+        }, {
+            resolve: `gatsby-plugin-sitemap`,
+            options: {
+                query: (`
             {
                 site {
                 siteMetadata {
@@ -88,41 +87,38 @@ module.exports = {
                     }
                 }
             }`),
-            output: `/sitemap.xml`,
-            serialize: ({
-                    site,
-                    allSitePage,
-                }) =>
-                allSitePage.edges.map(edge => ({
-                    url: site.siteMetadata.url + edge.node.path,
-                    changefreq: `daily`,
-                    priority: 0.7,
-                })),
-        },
-    },
-    {
-        resolve: `gatsby-plugin-robots-txt`,
-        options: {
-            host: `https://istomin.io`,
-            sitemap: `https://istomin.io/sitemap.xml`,
-            policy: [{
-                userAgent: `*`,
-                allow: `/`
-            }]
-        }
-    },
-    {
-        resolve: `gatsby-plugin-yandex-metrika`,
-        options: {
-            trackingId: '48754313',
-            webvisor: true,
-            trackHash: true,
-        },
-    },
-    {
-        resolve: `gatsby-plugin-feed`,
-        options: {
-          query: `
+                output: `/sitemap.xml`,
+                serialize: ({site, allSitePage}) => allSitePage
+                    .edges
+                    .map(edge => ({
+                        url: site.siteMetadata.url + edge.node.path,
+                        changefreq: `daily`,
+                        priority: 0.7
+                    }))
+            }
+        }, {
+            resolve: `gatsby-plugin-robots-txt`,
+            options: {
+                host: `https://istomin.io`,
+                sitemap: `https://istomin.io/sitemap.xml`,
+                policy: [
+                    {
+                        userAgent: `*`,
+                        allow: `/`
+                    }
+                ]
+            }
+        }, {
+            resolve: `gatsby-plugin-yandex-metrika`,
+            options: {
+                trackingId: 48754313,
+                webvisor: true,
+                trackHash: true
+            }
+        }, {
+            resolve: `gatsby-plugin-feed`,
+            options: {
+                query: `
             {
               site {
                 siteMetadata {
@@ -134,19 +130,30 @@ module.exports = {
               }
             }
           `,
-          feeds: [
-            {
-              serialize: ({ query: { site, allMarkdownRemark } }) => {
-                return allMarkdownRemark.edges.map(edge => {
-                  return Object.assign({}, edge.node.frontmatter, {
-                    description: edge.node.excerpt,
-                    url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                    guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                    custom_elements: [{ "content:encoded": edge.node.html }],
-                  });
-                });
-              },
-              query: `
+                feeds: [
+                    {
+                        serialize: ({
+                            query: {
+                                site,
+                                allMarkdownRemark
+                            }
+                        }) => {
+                            return allMarkdownRemark
+                                .edges
+                                .map(edge => {
+                                    return Object.assign({}, edge.node.frontmatter, {
+                                        description: edge.node.excerpt,
+                                        url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                                        guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                                        custom_elements: [
+                                            {
+                                                "content:encoded": edge.node.html
+                                            }
+                                        ]
+                                    });
+                                });
+                        },
+                        query: `
                 {
                   allMarkdownRemark(
                     limit: 1000,
@@ -167,14 +174,14 @@ module.exports = {
                   }
                 }
               `,
-              output: "/rss.xml",
-            },
-          ],
+                        output: "/rss.xml"
+                    }
+                ]
+            }
         },
-      },
-    `gatsby-plugin-offline`,
-    `gatsby-plugin-catch-links`,
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-postcss-sass`,
+        `gatsby-plugin-offline`,
+        `gatsby-plugin-catch-links`,
+        `gatsby-plugin-postcss-sass`,
+        `gatsby-plugin-styled-components`
     ]
 }

@@ -1,13 +1,15 @@
 {
-  "version": "0.0.2",
+  "version": "0.1.0",
   "name": "istomin-io",
   "description": "Istomin's Blog",
   "license": "MIT",
   "repository": "https://github.com/Ivan-Istomin/istomin-io",
+  "bugs": {
+    "url": "https://github.com/Ivan-Istomin/istomin-io/issues"
+  },
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "clean:cache": "rm -rf public && rm -rf .cache && rm -rf node_modules",
     "lint": "./node_modules/.bin/eslint --cache --ext .js,.jsx --ignore-pattern public .",
     "test": "./node_modules/.bin/jest && bash <(curl -s https://codecov.io/bash)",
     "deploy": "gatsby build --prefix-paths"
@@ -22,7 +24,8 @@
   "author": "Ivan Istomin <ivan@istomin.im>",
   "dependencies": {
     "axios": "^0.18.0",
-    "bluebird": "^3.5.1",
+    "babel-plugin-styled-components": "^1.5.1",
+    "date-fns": "^2.0.0-alpha.8",
     "dotenv": "^5.0.1",
     "gatsby": "^1.9.250",
     "gatsby-cli": "^1.1.52",
@@ -51,12 +54,14 @@
     "gatsby-transformer-sharp": "^1.6.24",
     "lodash": "^4.17.10",
     "lost": "^8.2.1",
-    "npm": "^6.0.0",
-    "postcss-pxtorem": "^4.0.1",
+    "node-sass": "^4.9.0",
     "prismjs": "^1.14.0",
     "react-helmet": "^5.2.0",
     "react-images": "^0.5.17",
     "slash": "^2.0.0",
+    "styled-components": "^3.2.6",
+    "styled-jsx": "^2.2.6",
+    "styled-jsx-plugin-sass": "^0.2.4",
     "typography-theme-sutro": "^0.15.10",
     "url-loader": "^1.0.1"
   },
@@ -68,7 +73,6 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "gh-pages": "^1.1.0",
     "jest": "^22.4.3",
     "prettier": "^1.12.1"
   },
