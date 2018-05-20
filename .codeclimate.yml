@@ -20,8 +20,7 @@ engines:
 ratings:
    paths:
     - "**.js"
-    - "**.jsx"
     - "**.scss"
 
 exclude_paths:
-- src/assets/fonts/**/*
+- src/styles/fonts/**/*

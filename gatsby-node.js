@@ -1,9 +1,6 @@
 const _ = require('lodash');
 const path = require('path');
-const lost = require('lost');
 const slash = require('slash');
-// const createPaginatedPages = require('gatsby-paginate');
-// createPaginatedPages();
 
 exports.createPages = ({graphql, boundActionCreators}) => {
   const {createPage} = boundActionCreators;
@@ -65,9 +62,14 @@ exports.createPages = ({graphql, boundActionCreators}) => {
 
           _.each(tags, (tag) => {
             const tagPath = `/tags/${_.kebabCase(tag)}/`;
-            createPage({path: tagPath, component: main, context: {
-                name: tag, type: 'tag'
-              }});
+            createPage({
+              path: tagPath,
+              component: main,
+              context: {
+                name: tag,
+                type: 'tag'
+              }
+            });
           });
 
           let categories = [];
@@ -78,9 +80,14 @@ exports.createPages = ({graphql, boundActionCreators}) => {
           categories = _.uniq(categories);
           _.each(categories, (category) => {
             const categoryPath = `/categories/${_.kebabCase(category)}/`;
-            createPage({path: categoryPath, component: main, context: {
-                name: category, type: 'category'
-              }});
+            createPage({
+              path: categoryPath,
+              component: main,
+              context: {
+                name: category,
+                type: 'category'
+              }
+            });
           });
         }
       });
@@ -118,10 +125,4 @@ exports.onCreateNode = ({node, boundActionCreators, getNode}) => {
       createNodeField({node, name: 'categorySlug', value: categorySlug});
     }
   }
-};
-
-exports.modifyWebpackConfig = ({config}) => {
-  config.merge({
-    postcss: [lost()]
-  });
 };

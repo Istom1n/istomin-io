@@ -1,7 +1,6 @@
 module.exports = {
     siteMetadata: {
         url: `https://istomin.io`,
-        siteUrl: `https://istomin.io`,
         title: `Istomin's Blog`,
         description: `Everything that seems interesting to me`,
         subtitle: `Simplex sigillum veri.`,
@@ -60,8 +59,7 @@ module.exports = {
         },
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,
-        `gatsby-plugin-react-helmet`,
-        {
+        `gatsby-plugin-react-helmet`, {
             resolve: `gatsby-plugin-google-fonts`,
             options: {
                 fonts: [`roboto:400,400i,500,700`]
@@ -124,8 +122,7 @@ module.exports = {
                 siteMetadata {
                   title
                   description
-                  siteUrl
-                  site_url: siteUrl
+                  site_url: url
                 }
               }
             }
@@ -143,8 +140,8 @@ module.exports = {
                                 .map(edge => {
                                     return Object.assign({}, edge.node.frontmatter, {
                                         description: edge.node.excerpt,
-                                        url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                                        guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                                        url: site.siteMetadata.url + edge.node.fields.slug,
+                                        guid: site.siteMetadata.url + edge.node.fields.slug,
                                         custom_elements: [
                                             {
                                                 "content:encoded": edge.node.html
@@ -181,7 +178,7 @@ module.exports = {
         },
         `gatsby-plugin-offline`,
         `gatsby-plugin-catch-links`,
-        `gatsby-plugin-postcss-sass`,
+        `gatsby-plugin-sass`,
         `gatsby-plugin-styled-components`
     ]
 }

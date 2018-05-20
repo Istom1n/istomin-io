@@ -4,17 +4,20 @@ import Sidebar from '../components/Sidebar';
 import TagTemplateDetails from '../components/TagTemplateDetails';
 import CategoryTemplateDetails from '../components/CategoryTemplateDetails';
 
-export default({children, data}) => {
-
+class MainTemplate extends React.Component {
+  render() {
     const {name} = this.props.pathContext;
+    const title = `Все записи тега ${name} - ${data.site.siteMetadata.title}`;
 
     return (
-        <Layout title={`Все записи тега "${tag}" - ${data.site.siteMetadata.title}`}>
-            <Sidebar/> {Children()}
-        </Layout>
+      <Layout title={title}>
+        <Sidebar/> {children()}
+      </Layout>
     );
-
+  }
 }
+
+export default MainTemplate;
 
 export const pageQuery = graphql `
   query pathContext($name: String, $type: String) {

@@ -2,10 +2,36 @@ import React from 'react';
 import Link from 'gatsby-link';
 import styled from 'styled-components';
 
-const Nav = styled.nav `
-@import "../assets/scss/variables";
-@import "../assets/scss/mixins";
+class Menu extends React.Component {
+  render() {
+    return (
+      <Wrapper>
+        <nav className="menu">
+          <ul className="menu__list">
+            {this
+              .props
+              .data
+              .map(item => (
+                <li className="menu__list-item" key={item.path}>
+                  <Link
+                    exact
+                    to={item.path}
+                    className="menu__list-item-link"
+                    activeClassName="menu__list-item-link menu__list-item-link--active">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </nav>
+      </Wrapper>
+    );
+  }
+}
 
+export default Menu;
+
+const Wrapper = styled.section `
 .menu {
     @include margin-bottom(1);
     &__list {
@@ -33,29 +59,4 @@ const Nav = styled.nav `
         }
     }
 }
-`
-
-class Menu extends React.Component {
-  render() {
-    return (
-      <nav className="menu">
-        <ul className="menu__list">
-          {this.props.data.map(item => (
-            <li className="menu__list-item" key={item.path}>
-              <Link
-                exact
-                to={item.path}
-                className="menu__list-item-link"
-                activeClassName="menu__list-item-link menu__list-item-link--active">
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    );
-  }
-}
-
-export default Menu;
-
+`;

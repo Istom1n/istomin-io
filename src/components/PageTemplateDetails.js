@@ -5,7 +5,7 @@ import styled from 'styled-components';
 class PageTemplateDetails extends React.Component {
   render() {
     return (
-      <div>
+      <Wrapper>
         <Sidebar/>
         <div className="content">
           <div className="content__inner">
@@ -19,17 +19,14 @@ class PageTemplateDetails extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </Wrapper>
     );
   }
 }
 
 export default PageTemplateDetails;
 
-const Div = styled.div `
-@import "../assets/scss/variables";
-@import "../assets/scss/mixins";
-
+const Wrapper = styled.section `
 .page {
     @include margin-bottom(2);
     &__title {

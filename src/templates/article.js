@@ -5,25 +5,28 @@ import PageTemplateDetails from '../components/PageTemplateDetails';
 
 import "katex/dist/katex.min.css"
 
-export default({data}) => {
+class ArticleTemplate extends React.Component {
+  render() {
+    const {title, subtitle} = this.props.data.site.siteMetadata;
+    const post = this.props.data.markdownRemark;
+    const {title: postTitle, description: postDescription} = post.frontmatter;
+    const description = postDescription !== null
+      ? postDescription
+      : subtitle;
 
-  const {title, subtitle} = this.props.data.site.siteMetadata;
-  const post = this.props.data.markdownRemark;
-  const {title: postTitle, description: postDescription} = post.frontmatter;
-  const description = postDescription !== null
-    ? postDescription
-    : subtitle;
+    return (
 
-  return (
-    <Layout title={postTitle}>
-      <PostTemplateDetails {...this.props}/>
-    </Layout>
-  );
-
+      <Layout title={postTitle}>
+        <PostTemplateDetails {...this.props}/>
+      </Layout>
+    )
+  }
 }
 
+export default ArticleTemplate;
+
 export const pageQuery = graphql `
-  query ArticleBySlug($slug: String!) {
+  query ArticleBySlug($slug: String) {
     site {
       siteMetadata {
         title

@@ -17,7 +17,7 @@ export default({data}) => {
         <title>{title}</title>
         <meta name="description" content={subtitle}/>
       </Helmet>
-      <Sidebar {...data}/>
+      <Sidebar/>
       <div className="content">
         <div className="content__inner">
           {items}

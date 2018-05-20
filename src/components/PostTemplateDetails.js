@@ -10,7 +10,7 @@ class PostTemplateDetails extends React.Component {
         const tags = post.fields.tagSlugs;
 
         return (
-            <div>
+            <Wrapper>
                 <Link className="post-single__home-button" to="/">Все статьи</Link>
                 <div className="post-single">
                     <div className="post-single__inner">
@@ -50,17 +50,14 @@ class PostTemplateDetails extends React.Component {
                         </p>
                     </div>
                 </div>
-            </div>
+            </Wrapper>
         );
     }
 }
 
 export default PostTemplateDetails;
 
-const Div = styled.div `
-@import "../assets/scss/variables";
-@import "../assets/scss/mixins";
-
+const Wrapper = styled.section `
 .post-single {
     &__inner {
         max-width: $layout-post-single-max-width;
