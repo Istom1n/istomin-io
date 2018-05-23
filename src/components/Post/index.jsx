@@ -8,7 +8,6 @@ class Post extends React.Component {
   render() {
     const {title, date, category, description, cover} = this.props.data.node.frontmatter;
     const {slug, categorySlug} = this.props.data.node.fields;
-    const {sizes} = this.props.data.node.frontmatter.cover.childImageSharp;
 
     return (
       <div className="post">
@@ -26,9 +25,9 @@ class Post extends React.Component {
         <h2 className="post__title">
           <Link className="post__title-link" to={slug}>{title}</Link>
         </h2>
-        <Link to={slug}>
+        {/* <Link to={slug}>
           <Img sizes={sizes}/>
-        </Link>
+        </Link> */}
         <p className="post__description">{description}</p>
         <Link className="post__readmore" to={slug}>Читать далее...</Link>
       </div>
