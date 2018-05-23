@@ -7,13 +7,8 @@ const slash = require('slash');
 // const createPaginatedPages = require('gatsby-paginate');
 // createPaginatedPages();
 
-exports.createPages = ({
-  graphql,
-  boundActionCreators
-}) => {
-  const {
-    createPage
-  } = boundActionCreators;
+exports.createPages = ({graphql, boundActionCreators}) => {
+  const {createPage} = boundActionCreators;
 
   return new Promise((resolve, reject) => {
     const postTemplate = path.resolve('./src/templates/post-template.jsx');
@@ -73,13 +68,9 @@ exports.createPages = ({
 
           _.each(tags, (tag) => {
             const tagPath = `/tags/${_.kebabCase(tag)}/`;
-            createPage({
-              path: tagPath,
-              component: tagTemplate,
-              context: {
+            createPage({path: tagPath, component: tagTemplate, context: {
                 tag
-              }
-            });
+              }});
           });
 
           let categories = [];
@@ -90,13 +81,9 @@ exports.createPages = ({
           categories = _.uniq(categories);
           _.each(categories, (category) => {
             const categoryPath = `/categories/${_.kebabCase(category)}/`;
-            createPage({
-              path: categoryPath,
-              component: categoryTemplate,
-              context: {
+            createPage({path: categoryPath, component: categoryTemplate, context: {
                 category
-              }
-            });
+              }});
           });
         }
       });
@@ -106,59 +93,38 @@ exports.createPages = ({
   });
 };
 
-exports.onCreateNode = ({
-  node,
-  boundActionCreators,
-  getNode
-}) => {
-  const {
-    createNodeField
-  } = boundActionCreators;
+exports.onCreateNode = ({node, boundActionCreators, getNode}) => {
+  const {createNodeField} = boundActionCreators;
 
   if (node.internal.type === 'File') {
     const parsedFilePath = path.parse(node.absolutePath);
-    const slug = `/${parsedFilePath.dir.split('---')[1]}/`;
-    createNodeField({
-      node,
-      name: 'slug',
-      value: slug
-    });
-  } else if (
-    node.internal.type === 'MarkdownRemark' &&
-    typeof node.slug === 'undefined'
-  ) {
+    const slug = `/${parsedFilePath
+      .dir
+      .split('---')[1]}/`;
+    createNodeField({node, name: 'slug', value: slug});
+  } else if (node.internal.type === 'MarkdownRemark' && typeof node.slug === 'undefined') {
     if (typeof node.frontmatter.path !== 'undefined') {
       slug = node.frontmatter.path;
     }
-    createNodeField({
-      node,
-      name: 'slug',
-      value: slug
-    });
+
+    createNodeField({node, name: 'slug', value: slug});
 
     if (node.frontmatter.tags) {
-      const tagSlugs = node.frontmatter.tags.map(tag => `/tags/${_.kebabCase(tag)}/`);
-      createNodeField({
-        node,
-        name: 'tagSlugs',
-        value: tagSlugs
-      });
+      const tagSlugs = node
+        .frontmatter
+        .tags
+        .map(tag => `/tags/${_.kebabCase(tag)}/`);
+      createNodeField({node, name: 'tagSlugs', value: tagSlugs});
     }
 
     if (typeof node.frontmatter.category !== 'undefined') {
       const categorySlug = `/categories/${_.kebabCase(node.frontmatter.category)}/`;
-      createNodeField({
-        node,
-        name: 'categorySlug',
-        value: categorySlug
-      });
+      createNodeField({node, name: 'categorySlug', value: categorySlug});
     }
   }
 };
 
-exports.modifyWebpackConfig = ({
-  config
-}) => {
+exports.modifyWebpackConfig = ({config}) => {
   config.merge({
     postcss: [
       lost(),

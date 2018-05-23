@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import moment from 'moment';
+import format from 'date-fns/format';
 import './style.scss';
 
 class PostTemplateDetails extends React.Component {
   render() {
-    const { subtitle, author } = this.props.data.site.siteMetadata;
+    const {subtitle, author} = this.props.data.site.siteMetadata;
     const post = this.props.data.markdownRemark;
     const tags = post.fields.tagSlugs;
 
@@ -35,18 +35,28 @@ class PostTemplateDetails extends React.Component {
         <div className="post-single">
           <div className="post-single__inner">
             <h1 className="post-single__title">{post.frontmatter.title}</h1>
-            <div className="post-single__body" dangerouslySetInnerHTML={{ __html: post.html }} />
+            <div
+              className="post-single__body"
+              dangerouslySetInnerHTML={{
+              __html: post.html
+            }}/>
             <div className="post-single__date">
-              <em>Опубликовано {moment(post.frontmatter.date).format('DD.MM.YYYY')}</em>
+              <em>Опубликовано {format(post.frontmatter.date, 'DD.MM.YYYY')}</em>
             </div>
           </div>
           <div className="post-single__footer">
             {tagsBlock}
-            <hr />
+            <hr/>
             <p className="post-single__footer-text">
               {subtitle}
-              <a href={`https://twitter.com/${author.twitter}`} target="_blank" rel="noopener noreferrer">
-                <br /> <strong>{author.name}</strong> on Twitter
+              <a
+                href={`https://twitter.com/${author.twitter}`}
+                target="_blank"
+                rel="noopener noreferrer">
+                <br/>
+                <strong>
+                  {author.name + ' on Twitter'}
+                </strong>
               </a>
             </p>
           </div>
@@ -57,21 +67,3 @@ class PostTemplateDetails extends React.Component {
 }
 
 export default PostTemplateDetails;
-
-// export const pageQuery = graphql`
-//   query IndexQuery {
-//     sizes: file(relativePath: { regex: "/fecolormatrix-kanye-west.jpg/" }) {
-//       childImageSharp {
-//         sizes(
-//           duotone: { highlight: "#f00e2e", shadow: "#192550" }
-//           traceSVG: {
-//             color: "#f00e2e"
-//             turnPolicy: TURNPOLICY_MINORITY
-//             blackOnWhite: false
-//           }
-//           toFormat: PNG
-//         ) {
-//           ...GatsbyImageSharpSizes_tracedSVG
-//         }
-//       }
-//     }`
